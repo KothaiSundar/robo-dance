@@ -1,0 +1,42 @@
+server:
+  port: 8072
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}
+
+spring:
+  cloud:
+    gateway:
+      server:
+        webflux:
+          default-filters:
+            - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
+          globalcors:
+            corsConfigurations:
+              '[/**]':
+                allowedOriginPatterns: "*"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders: "*"
+                allowCredentials: true
+          discovery:
+            locator:
+              enabled: false
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+            - id: workouts-service
+              uri: lb://workouts-service
+              predicates:
+                - Path=/api/workouts/**
+            - id: progress-service
+              uri: lb://progress-service
+              predicates:
+                - Path=/api/progress/**

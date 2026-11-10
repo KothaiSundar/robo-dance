@@ -1,0 +1,10 @@
+server:
+  port: 8083
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3307/robodance_progress?createDatabaseIfNotExist=true&useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+
+eureka:
+  instance:
+    instanceId: ${spring.application.name}:${server.port}

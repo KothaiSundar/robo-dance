@@ -1,0 +1,32 @@
+# Maven
+**/target/
+**/.mvn/wrapper/maven-wrapper.jar
+
+# IDE
+.idea/
+*.iml
+.vscode/
+*.classpath
+*.project
+*.settings/
+.metadata/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node / frontend (Phase 3)
+**/node_modules/
+**/dist/
+**/.env
+**/.env.local
+
+# Logs / local run output
+*.log
+**/run.out
+**/run.err
+**/*-run.out
+**/*-run.err
+
+# Docker volumes (local)
+docker-compose/data/

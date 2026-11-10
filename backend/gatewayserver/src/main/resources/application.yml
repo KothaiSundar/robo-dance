@@ -1,0 +1,28 @@
+spring:
+  application:
+    name: gatewayserver
+  config:
+    import: "optional:configserver:http://localhost:8071"
+  cloud:
+    gateway:
+      server:
+        webflux:
+          routes:
+            - id: auth-service
+              uri: lb://auth-service
+              predicates:
+                - Path=/api/auth/**
+            - id: workouts-service
+              uri: lb://workouts-service
+              predicates:
+                - Path=/api/workouts/**
+            - id: progress-service
+              uri: lb://progress-service
+              predicates:
+                - Path=/api/progress/**
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
